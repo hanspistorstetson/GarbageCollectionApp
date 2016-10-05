@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if @user.save
         login @user
         flash[:success] = "Welcome to the Stetson Garbage Collection Service"
-        redirect_back_or user
+        redirect_back_or @user
     else
       render 'new'
     end
