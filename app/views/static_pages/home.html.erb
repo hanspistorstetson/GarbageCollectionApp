@@ -1,10 +1,18 @@
 <div class="center jumbotron">
+<<<<<<< HEAD
   <% if logged_in? %>
     <h1>Welcome to Garbage Collection Services <%= User.find_by(id: session[:user_id]).name %> </h1>
   <% else %>
     <h1>Welcome to Garbage Collection Services</h1>
   <% end %>
 
+=======
+<% if logged_in? %>
+  <h1>Welcome to Garbage Collection Services <%= User.find_by(id: session[:user_id]).name %> </h1>
+<% else %>
+  <h1>Welcome to Garbage Collection Services</h1>
+<% end %>
+>>>>>>> 85fb1506aa29ecab30ed9cc994eef9c657ba1f84
   <h2>
       This is the home page for the Garbage Collection Service at Stetson University
   </h2>

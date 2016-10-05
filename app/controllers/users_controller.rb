@@ -19,9 +19,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+<<<<<<< HEAD
         UserMailer.account_activation(@user).deliver_now
         flash[:info] = "Please check your email to authenticate your account"
         redirect_to root_url
+=======
+        login @user
+        flash[:success] = "Welcome to the Stetson Garbage Collection Service"
+        redirect_back_or @user
+>>>>>>> 85fb1506aa29ecab30ed9cc994eef9c657ba1f84
     else
       render 'new'
     end
