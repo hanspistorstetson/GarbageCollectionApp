@@ -1,7 +1,9 @@
 <div class="center jumbotron">
-  <h1>Welcome to Garbage Collection Services</h1>
+  <h1>Welcome to Garbage Collection Services <%= User.find_by(id: session[:user_id]).name %> </h1>
   <h2>
       This is the home page for the Garbage Collection Service at Stetson University
   </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% if not logged_in? %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>
