@@ -7,17 +7,17 @@ def create
   # Amount in cents
   @amount = 250
 
-  customer = Stripe::Customer.create(
-    :email => params[:stripeEmail],
-    :source  => params[:stripeToken]
-  )
+  customer = StripeTool.create_customer(
+                                        email: params[:stripeEmail]
+                                        stripe_token: params[:stripe_token]
+                                        )
 
-  charge = Stripe::Charge.create(
-    :customer    => customer.id,
-    :amount      => @amount,
-    :description => 'Rails Stripe customer',
-    :currency    => 'usd'
-  )
+  charge = StripeTool.create_charge(
+                                    customer_id: customer_id,
+                                    amount: @amount,
+                                    description: 'Stetson Garbage Service'
+                                    )
+  
 
 rescue Stripe::CardError => e
   flash[:error] = e.message
