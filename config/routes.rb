@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users
   resources :charges
   resources :account_activations, only: [:edit]
+  get 'thanks', to: 'charges#thanks', as: 'thanks'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
