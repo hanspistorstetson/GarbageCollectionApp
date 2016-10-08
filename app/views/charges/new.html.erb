@@ -9,7 +9,7 @@
       <span>Amount: $2.50</span>
     </label>
   </article>
-
+  <%= hidden_field_tag :subscription, value: params[:subscription] %>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="A week's subscription"

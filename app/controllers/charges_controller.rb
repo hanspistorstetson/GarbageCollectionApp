@@ -1,28 +1,49 @@
 class ChargesController < ApplicationController
 
-def new
-end
+  before_action :set_plan
 
-def create
-  # Amount in cents
-  @amount = 250
+  def new
+  end
 
-  customer = Stripe::Customer.create(
-    :email => params[:stripeEmail],
-    :source  => params[:stripeToken]
-  )
+  def create
+    # Amount in cents
+    @amount = 250
 
-  charge = Stripe::Charge.create(
-    :customer    => customer.id,
-    :amount      => @amount,
-    :description => 'Rails Stripe customer',
-    :currency    => 'usd'
-  )
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
 
-rescue Stripe::CardError => e
-  flash[:error] = e.message
-  redirect_to new_charge_path
-end
+    if params[:subscription].include? 'yes'
+      StripeTool.create_membership(
+        email: params[:stripeEmail],
+        stripeToken: params[:stripeToken],
+        plan: @plan
+        )
+    else
+      charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => @amount,
+        :description => 'Stetson Garbage Collection',
+        :currency    => 'usd'
+      )
+    end
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_charge_path
+  end
+
+
+
+  private
+
+    def set_plan
+      @plan = 'weekly_garbage'
+    end
+
+
+
 
 
 
